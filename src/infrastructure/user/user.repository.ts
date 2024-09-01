@@ -6,7 +6,7 @@ const prismaClient = new PrismaClient();
 
 const UserRepository: UserRepositoryInterface = {
 	async create(entity: User) {
-		await prismaClient.user.create({
+		return await prismaClient.user.create({
 			data: {
 				name: entity.name,
 				cnpj: entity.cnpj,
