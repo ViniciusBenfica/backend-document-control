@@ -1,6 +1,15 @@
 export default interface IEnterpriseOnDocument {
-	enterpriseId: string;
-	documentId: string;
-	issueDate: string;
-	dueDate: string;
+	id?: string;
+	enterprise?: {
+		id: string;
+		name?: string;
+		cnpj?: string;
+	};
+	document?: {
+		id: string;
+		title?: string;
+		description?: string;
+	};
+	issueDate: Date;
+	dueDate: Date;
 }

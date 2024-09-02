@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {findAllEnterpriseOnDocument } from "./enterpriseOnDocument.route.function";
+import { findAllEnterpriseOnDocument } from "./enterpriseOnDocument.route.function";
 
 export const enterpriseOnDocumentRouter = Router();
 
