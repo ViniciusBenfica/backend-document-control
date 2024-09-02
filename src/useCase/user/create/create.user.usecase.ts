@@ -1,8 +1,8 @@
-import UserRepository from "../../infrastructure/user/user.repository";
-import { createUseronDocumentUseCase } from "../userOnDocument/create.userOnDocument.usecase";
-import type { InputUserDto, OutputUserDto } from "./create.user.dto";
+import UserRepository from "../../../infrastructure/user/user.repository";
+import { createUseronDocumentUseCase } from "../../userOnDocument/create.userOnDocument.usecase";
+import type { InputCreateUserDto, OutputCreateUserDto } from "./create.user.dto";
 
-export async function createUserUseCase(input: InputUserDto): Promise<OutputUserDto> {
+export async function createUserUseCase(input: InputCreateUserDto): Promise<OutputCreateUserDto> {
 	const createUserDto = {
 		name: input.name,
 		cnpj: input.cnpj,

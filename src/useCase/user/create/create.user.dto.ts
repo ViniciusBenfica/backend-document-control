@@ -1,4 +1,4 @@
-export interface InputUserDto {
+export interface InputCreateUserDto {
 	name: string;
 	cnpj: string;
 	documentId?: string;
@@ -6,7 +6,7 @@ export interface InputUserDto {
 	dueDate?: string;
 }
 
-export interface OutputUserDto {
+export interface OutputCreateUserDto {
 	name: string;
 	cnpj: string;
 }
