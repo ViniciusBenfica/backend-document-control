@@ -7,28 +7,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id             String           @id @default(cuid())
-  name           String           @unique
-  cnpj           String           @unique
-  userOnDocument UserOnDocument[]
+model Enterprise {
+  id                   String                 @id @default(cuid())
+  name                 String                 @unique
+  cnpj                 String                 @unique
+  enterpriseOnDocument EnterpriseOnDocument[]
 }
 
-model UserOnDocument {
-  id         String   @id @default(cuid())
-  user       User     @relation(fields: [userId], references: [id])
-  userId     String
-  document   Document @relation(fields: [documentId], references: [id])
-  documentId String
-  issueDate  DateTime
-  dueDate    DateTime
+model EnterpriseOnDocument {
+  id           String     @id @default(cuid())
+  enterprise   Enterprise @relation(fields: [enterpriseId], references: [id])
+  enterpriseId String
+  document     Document   @relation(fields: [documentId], references: [id])
+  documentId   String
+  issueDate    DateTime
+  dueDate      DateTime
 
-  @@unique([userId, documentId])
+  @@unique([enterpriseId, documentId])
 }
 
 model Document {
-  id             String           @id @default(cuid())
-  titulo         String
-  description    String
-  userOnDocument UserOnDocument[]
+  id                   String                 @id @default(cuid())
+  titulo               String
+  description          String
+  enterpriseOnDocument EnterpriseOnDocument[]
 }

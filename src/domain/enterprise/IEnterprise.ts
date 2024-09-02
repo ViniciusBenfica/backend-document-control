@@ -1,4 +1,4 @@
-export default interface IUser {
+export default interface IEnterprise {
 	id?: string;
 	name: string;
 	cnpj: string;
