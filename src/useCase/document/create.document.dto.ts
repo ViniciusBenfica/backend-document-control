@@ -1,9 +1,9 @@
 export interface InputDocumentDto {
-	titulo: string;
+	title: string;
 	description: string;
 }
 export interface OutputDocumentDto {
 	id: string;
-	titulo: string;
+	title: string;
 	description: string;
 }

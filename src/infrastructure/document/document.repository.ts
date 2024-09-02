@@ -8,7 +8,7 @@ const DocumentRepository: DocumentRepositoryInterface = {
 	async create(entity: Document) {
 		return await prismaClient.document.create({
 			data: {
-				titulo: entity.titulo,
+				title: entity.title,
 				description: entity.description,
 			},
 		});

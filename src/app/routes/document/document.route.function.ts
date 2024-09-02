@@ -2,9 +2,9 @@ import type { Request, Response } from "express";
 import { createDocumentUseCase } from "../../../useCase/document/create.document.usecase";
 
 export async function createDocument(req: Request, res: Response) {
-	const { titulo, description } = req.body;
+	const { title, description } = req.body;
 	const createDocumentDto = {
-		titulo,
+		title,
 		description,
 	};
 	const document = await createDocumentUseCase(createDocumentDto);

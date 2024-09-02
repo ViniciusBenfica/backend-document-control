@@ -5,7 +5,7 @@ export async function createDocumentUseCase(input: InputDocumentDto): Promise<Ou
 	const document = await DocumentRepository.create(input);
 	return {
 		id: document.id as string,
-		titulo: input.titulo,
+		title: input.title,
 		description: input.description,
 	};
 }

@@ -1,5 +1,5 @@
 export default interface IDocument {
 	id?: string;
-	titulo: string;
+	title: string;
 	description: string;
 }
