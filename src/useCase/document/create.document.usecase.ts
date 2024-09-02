@@ -1,9 +1,10 @@
 import DocumentRepository from "../../infrastructure/document/document.repository";
 import type { InputDocumentDto, OutputDocumentDto } from "./create.document.dto";
 
-export function createDocumentUseCase(input: InputDocumentDto): OutputDocumentDto {
-	DocumentRepository.create(input);
+export async function createDocumentUseCase(input: InputDocumentDto): Promise<OutputDocumentDto> {
+	const document = await DocumentRepository.create(input);
 	return {
+		id: document.id as string,
 		titulo: input.titulo,
 		description: input.description,
 	};
