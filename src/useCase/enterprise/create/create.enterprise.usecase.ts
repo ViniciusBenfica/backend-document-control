@@ -1,5 +1,5 @@
 import EnterpriseRepository from "../../../infrastructure/enterprise/enterprise.repository";
-import { createEnterpriseonDocumentUseCase } from "../../enterpriseOnDocument/create.enterpriseOnDocument.usecase";
+import { createEnterpriseonDocumentUseCase } from "../../enterpriseOnDocument/create/create.enterpriseOnDocument.usecase";
 import type { InputCreateEnterpriseDto, OutputCreateEnterpriseDto } from "./create.enterprise.dto";
 
 export async function createEnterpriseUseCase(input: InputCreateEnterpriseDto): Promise<OutputCreateEnterpriseDto> {
@@ -12,11 +12,12 @@ export async function createEnterpriseUseCase(input: InputCreateEnterpriseDto): 
 
 	if (input.documentId && enterprise.id && input.issueDate && input.dueDate) {
 		const createEnterpriseOnDocumentDto = {
-			enterpriseId: enterprise.id,
-			documentId: input.documentId,
+			enterprise: { id: enterprise.id },
+			document: { id: input.documentId },
 			issueDate: input.issueDate,
 			dueDate: input.dueDate,
 		};
+
 		createEnterpriseonDocumentUseCase(createEnterpriseOnDocumentDto);
 	}
 

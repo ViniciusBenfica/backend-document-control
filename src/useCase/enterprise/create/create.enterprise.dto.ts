@@ -2,8 +2,8 @@ export interface InputCreateEnterpriseDto {
 	name: string;
 	cnpj: string;
 	documentId?: string;
-	issueDate?: string;
-	dueDate?: string;
+	issueDate?: Date;
+	dueDate?: Date;
 }
 
 export interface OutputCreateEnterpriseDto {
