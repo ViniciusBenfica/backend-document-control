@@ -13,6 +13,9 @@ const UserRepository: UserRepositoryInterface = {
 			},
 		});
 	},
+	async findAll() {
+		return await prismaClient.user.findMany();
+	},
 };
 
 export default UserRepository;
