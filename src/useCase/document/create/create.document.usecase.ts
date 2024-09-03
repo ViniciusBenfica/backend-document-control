@@ -1,4 +1,4 @@
-import DocumentRepository from "../../infrastructure/document/document.repository";
+import DocumentRepository from "../../../infrastructure/document/document.repository";
 import type { InputDocumentDto, OutputDocumentDto } from "./create.document.dto";
 
 export async function createDocumentUseCase(input: InputDocumentDto): Promise<OutputDocumentDto> {

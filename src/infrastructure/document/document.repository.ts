@@ -13,6 +13,9 @@ const DocumentRepository: DocumentRepositoryInterface = {
 			},
 		});
 	},
+	async findAll() {
+		return await prismaClient.document.findMany();
+	},
 };
 
 export default DocumentRepository;
