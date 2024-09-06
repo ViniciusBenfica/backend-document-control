@@ -10,6 +10,7 @@ export interface InputEnterpriseOnDocumentDto {
 }
 
 export interface OutputEnterpriseOnDocumentDto {
+	id: string;
 	enterpriseId: string;
 	documentId: string;
 	issueDate: Date;

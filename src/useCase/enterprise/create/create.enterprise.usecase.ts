@@ -22,6 +22,7 @@ export async function createEnterpriseUseCase(input: InputCreateEnterpriseDto): 
 	}
 
 	return {
+		id: enterprise.id as string,
 		name: input.name,
 		cnpj: input.cnpj,
 	};
