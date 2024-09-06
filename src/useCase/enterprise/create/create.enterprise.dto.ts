@@ -7,6 +7,7 @@ export interface InputCreateEnterpriseDto {
 }
 
 export interface OutputCreateEnterpriseDto {
+	id: string;
 	name: string;
 	cnpj: string;
 }
