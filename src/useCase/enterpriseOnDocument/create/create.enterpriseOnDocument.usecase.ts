@@ -1,7 +1,9 @@
 import EnterpriseOnDocumentRepository from "../../../infrastructure/enterpriseOnDocument/enterpriseOnDocument.repository";
 import type { InputEnterpriseOnDocumentDto, OutputEnterpriseOnDocumentDto } from "./create.enterpriseOnDocument.dto";
 
-export async function createEnterpriseonDocumentUseCase(input: InputEnterpriseOnDocumentDto): OutputEnterpriseOnDocumentDto {
+export async function createEnterpriseonDocumentUseCase(
+	input: InputEnterpriseOnDocumentDto,
+): Promise<OutputEnterpriseOnDocumentDto> {
 	const enterpriseOnDocument = await EnterpriseOnDocumentRepository.create(input);
 	return {
 		id: enterpriseOnDocument.id as string,
