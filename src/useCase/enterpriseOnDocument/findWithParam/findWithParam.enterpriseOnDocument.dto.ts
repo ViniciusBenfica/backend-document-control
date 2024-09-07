@@ -4,7 +4,11 @@ export interface InputFindEnterpriseOnDocumentQueryParamDto {
 
 export interface OutputFindEnterpriseOnDocumentQueryParamDto {
 	id: string;
-	document: string;
-	dueDate: Date;
-	issueDate: Date;
+	issueDate: string;
+	dueDate: string;
+	document: {
+		id: string;
+		title: string;
+		description: string;
+	};
 }

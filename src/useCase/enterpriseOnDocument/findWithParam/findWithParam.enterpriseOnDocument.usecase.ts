@@ -12,9 +12,13 @@ export async function findEnterpriseOnDocumentQueryParamUseCase(
 	return enterpriseOnDocument.map((enterpriseOnDocument) => {
 		return {
 			id: enterpriseOnDocument.id as string,
-			document: enterpriseOnDocument.document?.title as string,
-			dueDate: enterpriseOnDocument.dueDate,
 			issueDate: enterpriseOnDocument.issueDate,
+			dueDate: enterpriseOnDocument.dueDate,
+			document: {
+				id: enterpriseOnDocument.document?.id as string,
+				title: enterpriseOnDocument.document?.title as string,
+				description: enterpriseOnDocument.document?.description as string,
+			},
 		};
 	});
 }
