@@ -10,16 +10,16 @@ export async function createEnterpriseUseCase(input: InputCreateEnterpriseDto): 
 
 	const enterprise = await EnterpriseRepository.create(createEnterpriseDto);
 
-	if (input.documentId && enterprise.id && input.issueDate && input.dueDate) {
-		const createEnterpriseOnDocumentDto = {
-			enterprise: { id: enterprise.id },
-			document: { id: input.documentId },
-			issueDate: input.issueDate,
-			dueDate: input.dueDate,
-		};
+	// if (input.documentId && enterprise.id && input.issueDate && input.dueDate) {
+	// 	const createEnterpriseOnDocumentDto = {
+	// 		enterprise: { id: enterprise.id },
+	// 		document: { id: input.documentId },
+	// 		issueDate: input.issueDate,
+	// 		dueDate: input.dueDate,
+	// 	};
 
-		createEnterpriseonDocumentUseCase(createEnterpriseOnDocumentDto);
-	}
+	// 	createEnterpriseonDocumentUseCase(createEnterpriseOnDocumentDto);
+	// }
 
 	return {
 		id: enterprise.id as string,

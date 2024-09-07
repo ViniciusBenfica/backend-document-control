@@ -16,6 +16,13 @@ const EnterpriseRepository: EnterpriseRepositoryInterface = {
 	async findAll() {
 		return await prismaClient.enterprise.findMany();
 	},
+	async find(id: string) {
+		return await prismaClient.enterprise.findFirstOrThrow({
+			where: {
+				id: id,
+			},
+		});
+	},
 };
 
 export default EnterpriseRepository;
