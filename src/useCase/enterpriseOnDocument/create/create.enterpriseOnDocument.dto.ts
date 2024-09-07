@@ -5,14 +5,14 @@ export interface InputEnterpriseOnDocumentDto {
 	document: {
 		id: string;
 	};
-	issueDate: Date;
-	dueDate: Date;
+	issueDate: string;
+	dueDate: string;
 }
 
 export interface OutputEnterpriseOnDocumentDto {
 	id: string;
 	enterpriseId: string;
 	documentId: string;
-	issueDate: Date;
-	dueDate: Date;
+	issueDate: string;
+	dueDate: string;
 }

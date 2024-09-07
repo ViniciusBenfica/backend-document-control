@@ -10,6 +10,6 @@ export default interface IEnterpriseOnDocument {
 		title?: string;
 		description?: string;
 	};
-	issueDate: Date;
-	dueDate: Date;
+	issueDate: string;
+	dueDate: string;
 }

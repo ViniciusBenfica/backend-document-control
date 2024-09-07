@@ -1,7 +1,7 @@
 export interface OutputFindAllEnterpriseOnDocumentDto {
 	id: string;
-	issueDate: Date;
-	dueDate: Date;
+	issueDate: string;
+	dueDate: string;
 	enterprise: {
 		id: string;
 		name: string;
