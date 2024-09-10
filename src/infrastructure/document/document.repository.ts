@@ -16,6 +16,24 @@ const DocumentRepository: DocumentRepositoryInterface = {
 	async findAll() {
 		return await prismaClient.document.findMany();
 	},
+	async find(id: string) {
+		return await prismaClient.document.findFirstOrThrow({
+			where: {
+				id: id,
+			},
+		});
+	},
+	async update(entity: Document) {
+		return await prismaClient.document.update({
+			where: {
+				id: entity.id,
+			},
+			data: {
+				title: entity.title,
+				description: entity.description,
+			},
+		});
+	},
 };
 
 export default DocumentRepository;
