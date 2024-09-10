@@ -34,6 +34,11 @@ const DocumentRepository: DocumentRepositoryInterface = {
 			},
 		});
 	},
+	async delete(id: string) {
+		return await prismaClient.document.delete({
+			where: { id },
+		});
+	},
 };
 
 export default DocumentRepository;

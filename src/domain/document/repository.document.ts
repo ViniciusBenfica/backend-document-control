@@ -4,4 +4,5 @@ export default interface DocumentRepositoryInterface {
 	findAll(): Promise<Document[]>;
 	find(id: string): Promise<Document>;
 	update(entity: Partial<Document>): Promise<Document>;
+	delete(id: string): Promise<Document>;
 }
