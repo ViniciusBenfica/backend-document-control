@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import { createEnterpriseUseCase } from "../../../useCase/enterprise/create/create.enterprise.usecase";
 import { findEnterpriseUseCase } from "../../../useCase/enterprise/find/find.enterprise.usecase";
 import { findAllEnterpriseUseCase } from "../../../useCase/enterprise/findAll/findAll.enterprise.usecase";
+import { updateEnterpriseUseCase } from "../../../useCase/enterprise/update/update.enterprise.usecase";
 
 export async function createEnterprise(req: Request, res: Response) {
 	const { name, cnpj, documentId, issueDate, dueDate } = req.body;
@@ -28,4 +29,18 @@ export async function findEnterprise(req: Request, res: Response) {
 	};
 	const enterprise = await findEnterpriseUseCase(findEnterpriseDto);
 	return res.status(201).json(enterprise);
+}
+
+export async function updateEnterprise(req: Request, res: Response) {
+	const { id } = req.params;
+	const { name, cnpj, documents } = req.body;
+	const updateDocumentDto = {
+		id,
+		name,
+		cnpj,
+		documents,
+	};
+	const document = await updateEnterpriseUseCase(updateDocumentDto);
+
+	return res.status(201).json(document);
 }

@@ -28,9 +28,14 @@ export async function findDocument(req: Request, res: Response) {
 		id,
 	};
 
-	const document = await findDocumentUseCase(updateDocumentDto);
-
-	return res.status(201).json(document);
+	try {
+		const document = await findDocumentUseCase(updateDocumentDto);
+		res.status(200).send(document);
+	} catch (error) {
+		if (error instanceof Error) {
+			res.status(500).send({ error: error.message });
+		}
+	}
 }
 
 export async function updateDocument(req: Request, res: Response) {

@@ -3,4 +3,5 @@ export default interface EnterpriseOnDocumentRepositoryInterface {
 	create(entity: EnterpriseOnDocument): Promise<EnterpriseOnDocument>;
 	findAll(): Promise<EnterpriseOnDocument[]>;
 	findWithQuery(param: { enterpriseId?: string }): Promise<EnterpriseOnDocument[]>;
+	update(enterpriseId: string, entity: Partial<EnterpriseOnDocument[]>): Promise<void>;
 }

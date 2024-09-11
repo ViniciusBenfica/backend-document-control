@@ -23,6 +23,17 @@ const EnterpriseRepository: EnterpriseRepositoryInterface = {
 			},
 		});
 	},
+	async update(entity: Enterprise) {
+		return await prismaClient.enterprise.update({
+			where: {
+				id: entity.id,
+			},
+			data: {
+				name: entity.name,
+				cnpj: entity.cnpj,
+			},
+		});
+	},
 };
 
 export default EnterpriseRepository;

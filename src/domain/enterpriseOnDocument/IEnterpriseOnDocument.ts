@@ -1,12 +1,12 @@
 export default interface IEnterpriseOnDocument {
 	id?: string;
 	enterprise?: {
-		id: string;
+		id?: string;
 		name?: string;
 		cnpj?: string;
 	};
 	document?: {
-		id: string;
+		id?: string;
 		title?: string;
 		description?: string;
 	};

@@ -34,6 +34,17 @@ const EnterpriseOnDocumentRepository: EnterpriseOnDocumentRepositoryInterface = 
 			},
 		});
 	},
+	async update(enterpriseId: string, entity: IEnterpriserOnDocument) {
+		await prismaClient.enterpriseOnDocument.updateMany({
+			where: {
+				enterpriseId: enterpriseId,
+			},
+			data: {
+				issueDate: entity.issueDate,
+				dueDate: entity.dueDate,
+			},
+		});
+	},
 };
 
 export default EnterpriseOnDocumentRepository;
