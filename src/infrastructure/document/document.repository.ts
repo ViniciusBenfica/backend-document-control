@@ -35,6 +35,12 @@ const DocumentRepository: DocumentRepositoryInterface = {
 		});
 	},
 	async delete(id: string) {
+		await prismaClient.enterpriseOnDocument.deleteMany({
+			where: {
+				documentId: id,
+			},
+		});
+
 		return await prismaClient.document.delete({
 			where: { id },
 		});

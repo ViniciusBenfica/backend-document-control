@@ -4,4 +4,5 @@ export default interface EnterpriseRepositoryInterface {
 	findAll(): Promise<Enterprise[]>;
 	find(id: string): Promise<Enterprise>;
 	update(entity: Partial<Enterprise>): Promise<Enterprise>;
+	delete(id: string): Promise<Enterprise>;
 }

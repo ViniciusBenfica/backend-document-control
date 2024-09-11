@@ -34,6 +34,17 @@ const EnterpriseRepository: EnterpriseRepositoryInterface = {
 			},
 		});
 	},
+	async delete(id: string) {
+		await prismaClient.enterpriseOnDocument.deleteMany({
+			where: {
+				enterpriseId: id,
+			},
+		});
+
+		return await prismaClient.enterprise.delete({
+			where: { id },
+		});
+	},
 };
 
 export default EnterpriseRepository;
