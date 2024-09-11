@@ -28,6 +28,7 @@ export async function findEnterprise(req: Request, res: Response) {
 	const findEnterpriseDto = {
 		id,
 	};
+
 	try {
 		const enterprise = await findEnterpriseUseCase(findEnterpriseDto);
 		res.status(200).send(enterprise);
@@ -47,9 +48,15 @@ export async function updateEnterprise(req: Request, res: Response) {
 		cnpj,
 		documents,
 	};
-	const enterprise = await updateEnterpriseUseCase(updateEnterpriseDto);
 
-	return res.status(201).json(enterprise);
+	try {
+		const enterprise = await updateEnterpriseUseCase(updateEnterpriseDto);
+		res.status(200).send(enterprise);
+	} catch (error) {
+		if (error instanceof Error) {
+			res.status(500).send({ error: error.message });
+		}
+	}
 }
 
 export async function deleteEnterprise(req: Request, res: Response) {
@@ -57,7 +64,13 @@ export async function deleteEnterprise(req: Request, res: Response) {
 	const deleteEnterpriseDto = {
 		id,
 	};
-	const enterprise = await deleteEnterpriseUseCase(deleteEnterpriseDto);
 
-	return res.status(201).json(enterprise);
+	try {
+		const enterprise = await deleteEnterpriseUseCase(deleteEnterpriseDto);
+		res.status(200).send(enterprise);
+	} catch (error) {
+		if (error instanceof Error) {
+			res.status(500).send({ error: error.message });
+		}
+	}
 }

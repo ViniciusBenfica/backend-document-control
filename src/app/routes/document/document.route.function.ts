@@ -46,9 +46,15 @@ export async function updateDocument(req: Request, res: Response) {
 		title,
 		description,
 	};
-	const document = await updateDocumentUseCase(updateDocumentDto);
 
-	return res.status(201).json(document);
+	try {
+		const document = await updateDocumentUseCase(updateDocumentDto);
+		res.status(200).send(document);
+	} catch (error) {
+		if (error instanceof Error) {
+			res.status(500).send({ error: error.message });
+		}
+	}
 }
 
 export async function deleteDocument(req: Request, res: Response) {
@@ -56,7 +62,13 @@ export async function deleteDocument(req: Request, res: Response) {
 	const deleteDocumentDto = {
 		id,
 	};
-	const document = await deleteDocumentUseCase(deleteDocumentDto);
 
-	return res.status(201).json(document);
+	try {
+		const document = await deleteDocumentUseCase(deleteDocumentDto);
+		res.status(200).send(document);
+	} catch (error) {
+		if (error instanceof Error) {
+			res.status(500).send({ error: error.message });
+		}
+	}
 }
