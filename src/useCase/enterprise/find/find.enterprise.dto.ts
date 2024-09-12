@@ -7,6 +7,7 @@ export interface OutputFindEnterpriseDto {
 	cnpj: string;
 	documents: {
 		id: string;
+		documentId: string;
 		title: string;
 		description: string;
 		issueDate: string | Date;

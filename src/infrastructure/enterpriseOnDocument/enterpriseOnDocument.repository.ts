@@ -30,16 +30,23 @@ const EnterpriseOnDocumentRepository: EnterpriseOnDocumentRepositoryInterface = 
 			},
 		});
 	},
-	async update(enterpriseId: string, entity: IEnterpriserOnDocument) {
-		await prismaClient.enterpriseOnDocument.updateMany({
-			where: {
-				enterpriseId: enterpriseId,
-			},
-			data: {
-				issueDate: entity.issueDate,
-				dueDate: entity.dueDate,
-			},
+	async update(entity: IEnterpriserOnDocument[]) {
+		const updatePromises = entity.map((entity) => {
+			return prismaClient.enterpriseOnDocument.update({
+				where: {
+					enterpriseId_documentId: {
+						enterpriseId: entity.enterpriseId,
+						documentId: entity.documentId,
+					},
+				},
+				data: {
+					issueDate: entity.issueDate,
+					dueDate: entity.dueDate,
+				},
+			});
 		});
+
+		await prismaClient.$transaction(updatePromises);
 	},
 };
 

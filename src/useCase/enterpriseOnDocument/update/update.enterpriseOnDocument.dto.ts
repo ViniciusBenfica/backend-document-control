@@ -1,16 +1,13 @@
 export interface InputUpdateEnterpriseOnDocumentDto {
 	enterpriseId: string;
-	documents: {
-		id: string;
-		issueDate: string;
-		dueDate: string;
-	}[];
+	documentId: string;
+	issueDate: string;
+	dueDate: string;
 }
 
 export interface OutputUpdateEnterpriseOnDocumentDto {
-	documents: {
-		id: string;
-		issueDate: string;
-		dueDate: string;
-	}[];
+	enterpriseId: string;
+	documentId: string;
+	issueDate: string;
+	dueDate: string;
 }

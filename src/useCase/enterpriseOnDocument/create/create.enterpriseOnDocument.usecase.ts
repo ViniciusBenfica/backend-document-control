@@ -2,18 +2,13 @@ import EnterpriseOnDocumentRepository from "../../../infrastructure/enterpriseOn
 import type { InputEnterpriseOnDocumentDto, OutputEnterpriseOnDocumentDto } from "./create.enterpriseOnDocument.dto";
 
 export async function createEnterpriseonDocumentUseCase(
-	input: InputEnterpriseOnDocumentDto,
+	input: InputEnterpriseOnDocumentDto[],
 ): Promise<OutputEnterpriseOnDocumentDto> {
-	const createEnterpriseOnDocumentDto = input.documents.map((item) => ({
-		enterpriseId: input.enterpriseId,
-		documentId: item.id,
-		issueDate: item.issueDate,
-		dueDate: item.dueDate,
-	}));
-
-	await EnterpriseOnDocumentRepository.create(createEnterpriseOnDocumentDto);
+	await EnterpriseOnDocumentRepository.create(input);
 
 	return {
-		documents: input.documents,
+		documents: input.map((item) => {
+			return { id: item.documentId, issueDate: item.issueDate, dueDate: item.dueDate };
+		}),
 	};
 }

@@ -14,6 +14,7 @@ export async function findEnterpriseUseCase(input: InputFindEnterpriseDto): Prom
 		documents: enterpriseOnDocument.map((item) => {
 			return {
 				id: item.id,
+				documentId: item.document.id,
 				title: item.document.title,
 				description: item.document.description,
 				issueDate: item.issueDate,

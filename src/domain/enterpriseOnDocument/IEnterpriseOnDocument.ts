@@ -3,8 +3,10 @@ import type IEnterprise from "../enterprise/IEnterprise";
 
 export default interface IEnterpriseOnDocument {
 	id?: string;
-	enterprise: IEnterprise;
-	document: IDocument;
+	enterpriseId: string;
+	documentId: string;
+	enterprise?: Partial<IEnterprise>;
+	document?: Partial<IDocument>;
 	issueDate: string | Date;
 	dueDate: string | Date;
 }
