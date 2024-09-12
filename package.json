@@ -6,6 +6,7 @@
 	"scripts": {
 		"dev": "tsx watch --env-file .env src/app/index.ts",
 		"seed": "tsx prisma/seed.ts",
+		"migration": "npx prisma migrate dev",
 		"test": "vitest",
 		"build": "CI=false tsc",
 		"lint": "biome lint ./src"

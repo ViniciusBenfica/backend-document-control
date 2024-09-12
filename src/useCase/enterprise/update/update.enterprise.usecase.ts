@@ -18,6 +18,6 @@ export async function updateEnterpriseUseCase(input: InputUpdateEnterpriseDto): 
 		id: input.id,
 		name: enterprise.name,
 		cnpj: enterprise.cnpj,
-		documents: enterpriseOnDocument.documents,
+		documents: input.documents,
 	};
 }
