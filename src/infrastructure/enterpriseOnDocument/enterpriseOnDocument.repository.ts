@@ -5,14 +5,9 @@ import type EnterpriseOnDocumentRepositoryInterface from "../../domain/enterpris
 const prismaClient = new PrismaClient();
 
 const EnterpriseOnDocumentRepository: EnterpriseOnDocumentRepositoryInterface = {
-	async create(entity: IEnterpriserOnDocument) {
-		return await prismaClient.enterpriseOnDocument.create({
-			data: {
-				enterprise: { connect: { id: entity.enterprise?.id } },
-				document: { connect: { id: entity.document?.id } },
-				issueDate: entity.issueDate,
-				dueDate: entity.dueDate,
-			},
+	async create(entity: IEnterpriserOnDocument[]) {
+		await prismaClient.enterpriseOnDocument.createMany({
+			data: entity,
 		});
 	},
 	async findAll() {

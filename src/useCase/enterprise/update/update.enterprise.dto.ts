@@ -2,7 +2,7 @@ export interface InputUpdateEnterpriseDto {
 	id: string;
 	name?: string;
 	cnpj?: string;
-	documents: {
+	documents?: {
 		id: string;
 		issueDate: string;
 		dueDate: string;

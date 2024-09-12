@@ -6,13 +6,11 @@ import { findAllEnterpriseUseCase } from "../../../useCase/enterprise/findAll/fi
 import { updateEnterpriseUseCase } from "../../../useCase/enterprise/update/update.enterprise.usecase";
 
 export async function createEnterprise(req: Request, res: Response) {
-	const { name, cnpj, documentId, issueDate, dueDate } = req.body;
+	const { name, cnpj, documents } = req.body;
 	const createEnterpriseDto = {
 		name,
 		cnpj,
-		documentId,
-		issueDate,
-		dueDate,
+		documents,
 	};
 	const enterprise = await createEnterpriseUseCase(createEnterpriseDto);
 	return res.status(201).json(enterprise);

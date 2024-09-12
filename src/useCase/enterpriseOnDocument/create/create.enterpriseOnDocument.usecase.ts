@@ -4,12 +4,16 @@ import type { InputEnterpriseOnDocumentDto, OutputEnterpriseOnDocumentDto } from
 export async function createEnterpriseonDocumentUseCase(
 	input: InputEnterpriseOnDocumentDto,
 ): Promise<OutputEnterpriseOnDocumentDto> {
-	const enterpriseOnDocument = await EnterpriseOnDocumentRepository.create(input);
+	const createEnterpriseOnDocumentDto = input.documents.map((item) => ({
+		enterpriseId: input.enterpriseId,
+		documentId: item.id,
+		issueDate: item.issueDate,
+		dueDate: item.dueDate,
+	}));
+
+	await EnterpriseOnDocumentRepository.create(createEnterpriseOnDocumentDto);
+
 	return {
-		id: enterpriseOnDocument.id as string,
-		enterpriseId: input.enterprise.id,
-		documentId: input.document.id,
-		issueDate: input.issueDate,
-		dueDate: input.dueDate,
+		documents: input.documents,
 	};
 }
