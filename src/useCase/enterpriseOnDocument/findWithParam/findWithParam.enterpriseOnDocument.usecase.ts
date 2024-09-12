@@ -9,15 +9,15 @@ export async function findEnterpriseOnDocumentQueryParamUseCase(
 ): Promise<OutputFindEnterpriseOnDocumentQueryParamDto[]> {
 	const enterpriseOnDocument = await EnterpriseOnDocumentRepository.findWithQuery(input);
 
-	return enterpriseOnDocument.map((enterpriseOnDocument) => {
+	return enterpriseOnDocument.map((item) => {
 		return {
-			id: enterpriseOnDocument.id as string,
-			issueDate: enterpriseOnDocument.issueDate,
-			dueDate: enterpriseOnDocument.dueDate,
+			id: item.id as string,
+			issueDate: item.issueDate,
+			dueDate: item.dueDate,
 			document: {
-				id: enterpriseOnDocument.document?.id as string,
-				title: enterpriseOnDocument.document?.title as string,
-				description: enterpriseOnDocument.document?.description as string,
+				id: item.document?.id as string,
+				title: item.document?.title as string,
+				description: item.document?.description as string,
 			},
 		};
 	});

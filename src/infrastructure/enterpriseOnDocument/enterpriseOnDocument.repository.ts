@@ -8,6 +8,7 @@ const EnterpriseOnDocumentRepository: EnterpriseOnDocumentRepositoryInterface = 
 	async create(entity: IEnterpriserOnDocument[]) {
 		await prismaClient.enterpriseOnDocument.createMany({
 			data: entity,
+			skipDuplicates: true,
 		});
 	},
 	async findAll() {
