@@ -31,6 +31,17 @@ const EnterpriseOnDocumentRepository: EnterpriseOnDocumentRepositoryInterface = 
 		});
 	},
 	async update(entity: IEnterpriserOnDocument[]) {
+		const incomingDocumentIds = entity.map((doc) => doc.documentId);
+
+		await prismaClient.enterpriseOnDocument.deleteMany({
+			where: {
+				enterpriseId: entity[0].enterpriseId,
+				documentId: {
+					notIn: incomingDocumentIds,
+				},
+			},
+		});
+
 		const updatePromises = entity.map((entity) => {
 			return prismaClient.enterpriseOnDocument.upsert({
 				where: {
