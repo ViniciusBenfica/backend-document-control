@@ -32,14 +32,20 @@ const EnterpriseOnDocumentRepository: EnterpriseOnDocumentRepositoryInterface = 
 	},
 	async update(entity: IEnterpriserOnDocument[]) {
 		const updatePromises = entity.map((entity) => {
-			return prismaClient.enterpriseOnDocument.update({
+			return prismaClient.enterpriseOnDocument.upsert({
 				where: {
 					enterpriseId_documentId: {
 						enterpriseId: entity.enterpriseId,
 						documentId: entity.documentId,
 					},
 				},
-				data: {
+				update: {
+					issueDate: entity.issueDate,
+					dueDate: entity.dueDate,
+				},
+				create: {
+					enterpriseId: entity.enterpriseId,
+					documentId: entity.documentId,
 					issueDate: entity.issueDate,
 					dueDate: entity.dueDate,
 				},
