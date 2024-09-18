@@ -1,6 +1,25 @@
 version: '3.7'
 
 services:
+  document-control-backend:
+    restart: unless-stopped
+    container_name: document-control-backend
+    build:
+      context: .
+      target: development
+    command: sh /app/entrypoint.sh
+    env_file:
+      - .env
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - document-control-postgres
+    networks:
+      - document-control-network
+
   document-control-postgres:
     container_name: document-control-postgres
     image: postgres:latest
@@ -15,3 +34,11 @@ services:
       - .env
     volumes:
       - ./db-data:/data/db
+    networks:
+      - document-control-network
+
+networks:
+  document-control-network:
+    name: document-control-network
+    driver: bridge
+    external: true

@@ -5,7 +5,7 @@ import { enterpriseRouter } from "./routes/enterprise/enterprise.route";
 import { enterpriseOnDocumentRouter } from "./routes/enterpriseOnDocument/enterpriseOnDocument.route";
 
 const app = express();
-const port = 3000;
+const port = process.env.SERVER_PORT || 3000;
 
 app.use(express.json());
 app.use(cors());
