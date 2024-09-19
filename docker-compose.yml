@@ -13,7 +13,6 @@ services:
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     volumes:
-      - .:/app
       - /app/node_modules
     depends_on:
       - document-control-postgres
