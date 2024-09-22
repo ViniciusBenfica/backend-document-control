@@ -12,8 +12,6 @@ services:
       - .env
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
-    volumes:
-      - /app/node_modules
     depends_on:
       - document-control-postgres
     networks:
@@ -32,10 +30,13 @@ services:
     env_file:
       - .env
     volumes:
-      - ./db-data:/data/db
+      - pgdata:/var/lib/postgresql/data
     networks:
       - document-control-network
 
 networks:
   document-control-network:
     external: true
+
+volumes:
+  pgdata:
