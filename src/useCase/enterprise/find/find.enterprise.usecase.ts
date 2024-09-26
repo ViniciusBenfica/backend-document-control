@@ -1,11 +1,11 @@
 import EnterpriseRepository from "../../../infrastructure/enterprise/enterprise.repository";
-import { findEnterpriseOnDocumentQueryParamUseCase } from "../../enterpriseOnDocument/findWithParam/findWithParam.enterpriseOnDocument.usecase";
+import { findAllEnterpriseOnDocumentUseCase } from "../../enterpriseOnDocument/findAll/findAll.enterpriseOnDocument.usecase";
 import type { InputFindEnterpriseDto, OutputFindEnterpriseDto } from "./find.enterprise.dto";
 
 export async function findEnterpriseUseCase(input: InputFindEnterpriseDto): Promise<OutputFindEnterpriseDto> {
 	const enterprise = await EnterpriseRepository.find(input.id);
 
-	const enterpriseOnDocument = await findEnterpriseOnDocumentQueryParamUseCase({ enterpriseId: enterprise.id as string });
+	const enterpriseOnDocument = await findAllEnterpriseOnDocumentUseCase({ enterprise: {id: enterprise.id} });
 
 	return {
 		id: enterprise.id as string,

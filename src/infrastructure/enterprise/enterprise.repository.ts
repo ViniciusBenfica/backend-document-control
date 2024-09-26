@@ -1,11 +1,10 @@
 import { PrismaClient } from "@prisma/client";
-import type Enterprise from "../../domain/enterprise/IEnterprise";
 import type EnterpriseRepositoryInterface from "../../domain/enterprise/repository.enterprise";
 
 const prismaClient = new PrismaClient();
 
 const EnterpriseRepository: EnterpriseRepositoryInterface = {
-	async create(entity: Enterprise) {
+	async create(entity) {
 		return await prismaClient.enterprise.create({
 			data: {
 				name: entity.name,
@@ -13,17 +12,27 @@ const EnterpriseRepository: EnterpriseRepositoryInterface = {
 			},
 		});
 	},
-	async findAll() {
-		return await prismaClient.enterprise.findMany();
+	async findAll(query) {
+		return await prismaClient.enterprise.findMany({
+			where: {
+				name: {
+					contains: query.name,
+					mode: "insensitive",
+				},
+				cnpj: {
+					contains: query.cnpj,
+				},
+			},
+		});
 	},
-	async find(id: string) {
+	async find(id) {
 		return await prismaClient.enterprise.findFirstOrThrow({
 			where: {
 				id: id,
 			},
 		});
 	},
-	async update(entity: Enterprise) {
+	async update(entity) {
 		return await prismaClient.enterprise.update({
 			where: {
 				id: entity.id,
@@ -34,7 +43,7 @@ const EnterpriseRepository: EnterpriseRepositoryInterface = {
 			},
 		});
 	},
-	async delete(id: string) {
+	async delete(id) {
 		await prismaClient.enterpriseOnDocument.deleteMany({
 			where: {
 				enterpriseId: id,

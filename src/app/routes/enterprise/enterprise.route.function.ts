@@ -17,7 +17,8 @@ export async function createEnterprise(req: Request, res: Response) {
 }
 
 export async function findAllEnterprise(req: Request, res: Response) {
-	const enterprise = await findAllEnterpriseUseCase();
+	const query = req.query as { name?: string; cnpj?: string };
+	const enterprise = await findAllEnterpriseUseCase(query);
 	return res.status(201).json(enterprise);
 }
 
