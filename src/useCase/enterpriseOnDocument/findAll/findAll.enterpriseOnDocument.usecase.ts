@@ -1,8 +1,8 @@
 import EnterpriseOnDocumentRepository from "../../../infrastructure/enterpriseOnDocument/enterpriseOnDocument.repository";
-import type { OutputFindAllEnterpriseOnDocumentDto } from "./findAll.enterpriseOnDocument.dto";
+import type { InputFindAllEnterpriseOnDocumentDto, OutputFindAllEnterpriseOnDocumentDto } from "./findAll.enterpriseOnDocument.dto";
 
-export async function findAllEnterpriseOnDocumentUseCase(): Promise<OutputFindAllEnterpriseOnDocumentDto[]> {
-	const enterprise = await EnterpriseOnDocumentRepository.findAll();
+export async function findAllEnterpriseOnDocumentUseCase(input: InputFindAllEnterpriseOnDocumentDto): Promise<OutputFindAllEnterpriseOnDocumentDto[]> {
+	const enterprise = await EnterpriseOnDocumentRepository.findAll(input);
 
 	return enterprise.map((enterprise) => {
 		return {

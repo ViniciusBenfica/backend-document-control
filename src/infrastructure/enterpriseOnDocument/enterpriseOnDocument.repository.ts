@@ -1,28 +1,34 @@
 import { PrismaClient } from "@prisma/client";
-import type IEnterpriserOnDocument from "../../domain/enterpriseOnDocument/IEnterpriseOnDocument";
 import type EnterpriseOnDocumentRepositoryInterface from "../../domain/enterpriseOnDocument/repository.enterpriseOnDocument";
 
 const prismaClient = new PrismaClient();
 
 const EnterpriseOnDocumentRepository: EnterpriseOnDocumentRepositoryInterface = {
-	async create(entity: IEnterpriserOnDocument[]) {
+	async create(entity) {
 		await prismaClient.enterpriseOnDocument.createMany({
 			data: entity,
 			skipDuplicates: true,
 		});
 	},
-	async findAll() {
-		return await prismaClient.enterpriseOnDocument.findMany({
-			include: {
-				enterprise: true,
-				document: true,
-			},
-		});
-	},
-	async findWithQuery(param: { enterpriseId?: string }) {
+	async findAll(query) {
 		return await prismaClient.enterpriseOnDocument.findMany({
 			where: {
-				enterpriseId: param.enterpriseId,
+				documentId: query.documentId,
+				enterprise: {
+					name: {
+						contains: query.enterprise?.name,
+						mode: "insensitive",
+					},
+					cnpj: {
+						contains: query.enterprise?.name,
+					}
+				},
+				document: {
+					title: {
+						contains: query.document?.title,
+						mode: "insensitive",
+					}
+				}
 			},
 			include: {
 				enterprise: true,
@@ -30,7 +36,7 @@ const EnterpriseOnDocumentRepository: EnterpriseOnDocumentRepositoryInterface = 
 			},
 		});
 	},
-	async update(entity: IEnterpriserOnDocument[]) {
+	async update(entity) {
 		const incomingDocumentIds = entity.map((doc) => doc.documentId);
 
 		await prismaClient.enterpriseOnDocument.deleteMany({
