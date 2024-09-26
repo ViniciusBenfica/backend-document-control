@@ -17,7 +17,8 @@ export async function createDocument(req: Request, res: Response) {
 }
 
 export async function findAllDocument(req: Request, res: Response) {
-	const document = await findAllDocumentUseCase();
+	const query = req.query as { title?: string };
+	const document = await findAllDocumentUseCase(query);
 
 	return res.status(201).json(document);
 }

@@ -1,8 +1,8 @@
 import DocumentRepository from "../../../infrastructure/document/document.repository";
-import type { OutputFindAllDocumentDto } from "./findAll.document.dto";
+import type { InputFindAllDocumentDto, OutputFindAllDocumentDto } from "./findAll.document.dto";
 
-export async function findAllDocumentUseCase(): Promise<OutputFindAllDocumentDto[]> {
-	const document = await DocumentRepository.findAll();
+export async function findAllDocumentUseCase(input: InputFindAllDocumentDto): Promise<OutputFindAllDocumentDto[]> {
+	const document = await DocumentRepository.findAll(input);
 
 	return document.map((document) => {
 		return {
