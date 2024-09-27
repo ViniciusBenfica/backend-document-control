@@ -7,12 +7,12 @@ export async function updateEnterpriseUseCase(input: InputUpdateEnterpriseDto): 
 
 	const updateEnterpriseOnDocumentDto = input.documents.map((item) => ({
 		enterpriseId: enterprise.id as string,
-		documentId: item.id,
+		documentId: item.documentId,
 		issueDate: item.issueDate,
 		dueDate: item.dueDate,
 	}));
 
-	const enterpriseOnDocument = await updateEnterpriseOnDocumentUseCase(updateEnterpriseOnDocumentDto);
+	await updateEnterpriseOnDocumentUseCase(updateEnterpriseOnDocumentDto);
 
 	return {
 		id: input.id,

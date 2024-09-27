@@ -3,7 +3,7 @@ export interface InputUpdateEnterpriseDto {
 	name: string;
 	cnpj: string;
 	documents: {
-		id: string;
+		documentId: string;
 		issueDate: string;
 		dueDate: string;
 	}[];
@@ -14,7 +14,7 @@ export interface OutputUpdateEnterpriseDto {
 	name: string;
 	cnpj: string;
 	documents: {
-		id: string;
+		documentId: string;
 		issueDate: string;
 		dueDate: string;
 	}[];
