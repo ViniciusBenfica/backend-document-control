@@ -14,21 +14,31 @@ const EnterpriseOnDocumentRepository: EnterpriseOnDocumentRepositoryInterface = 
 		return await prismaClient.enterpriseOnDocument.findMany({
 			where: {
 				documentId: query.documentId,
-				enterprise: {
-					name: {
-						contains: query.enterprise?.name,
-						mode: "insensitive",
+				OR: [
+					{
+						enterprise: {
+							name: {
+								contains: query.enterprise?.name,
+								mode: "insensitive",
+							},
+						},
 					},
-					cnpj: {
-						contains: query.enterprise?.name,
-					}
-				},
-				document: {
-					title: {
-						contains: query.document?.title,
-						mode: "insensitive",
-					}
-				}
+					{
+						enterprise: {
+							cnpj: {
+								contains: query.enterprise?.cnpj,
+							},
+						},
+					},
+					{
+						document: {
+							title: {
+								contains: query.document?.title,
+								mode: "insensitive",
+							},
+						},
+					},
+				],
 			},
 			include: {
 				enterprise: true,
