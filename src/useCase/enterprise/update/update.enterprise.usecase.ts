@@ -5,12 +5,10 @@ import type { InputUpdateEnterpriseDto, OutputUpdateEnterpriseDto } from "./upda
 export async function updateEnterpriseUseCase(input: InputUpdateEnterpriseDto): Promise<OutputUpdateEnterpriseDto> {
 	const enterprise = await EnterpriseRepository.update(input);
 
-	const updateEnterpriseOnDocumentDto = input.documents.map((item) => ({
+	const updateEnterpriseOnDocumentDto = {
 		enterpriseId: enterprise.id as string,
-		documentId: item.documentId,
-		issueDate: item.issueDate,
-		dueDate: item.dueDate,
-	}));
+		documents: input.documents,
+	};
 
 	await updateEnterpriseOnDocumentUseCase(updateEnterpriseOnDocumentDto);
 

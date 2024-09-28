@@ -13,7 +13,7 @@ const EnterpriseOnDocumentRepository: EnterpriseOnDocumentRepositoryInterface = 
 	async findAll(query) {
 		return await prismaClient.enterpriseOnDocument.findMany({
 			where: {
-				documentId: query.documentId,
+				enterpriseId: query.enterprise?.id,
 				OR: [
 					{
 						enterprise: {

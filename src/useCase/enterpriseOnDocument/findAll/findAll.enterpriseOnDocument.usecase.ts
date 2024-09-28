@@ -1,23 +1,28 @@
 import EnterpriseOnDocumentRepository from "../../../infrastructure/enterpriseOnDocument/enterpriseOnDocument.repository";
-import type { InputFindAllEnterpriseOnDocumentDto, OutputFindAllEnterpriseOnDocumentDto } from "./findAll.enterpriseOnDocument.dto";
+import type {
+	InputFindAllEnterpriseOnDocumentDto,
+	OutputFindAllEnterpriseOnDocumentDto,
+} from "./findAll.enterpriseOnDocument.dto";
 
-export async function findAllEnterpriseOnDocumentUseCase(input: InputFindAllEnterpriseOnDocumentDto): Promise<OutputFindAllEnterpriseOnDocumentDto[]> {
-	const enterprise = await EnterpriseOnDocumentRepository.findAll(input);
+export async function findAllEnterpriseOnDocumentUseCase(
+	input: InputFindAllEnterpriseOnDocumentDto,
+): Promise<OutputFindAllEnterpriseOnDocumentDto[]> {
+	const enterpriseOnDocument = await EnterpriseOnDocumentRepository.findAll(input);
 
-	return enterprise.map((enterprise) => {
+	return enterpriseOnDocument.map((enterpriseOnDocument) => {
 		return {
-			id: enterprise.id as string,
-			issueDate: enterprise.issueDate,
-			dueDate: enterprise.dueDate,
+			id: enterpriseOnDocument.id as string,
+			issueDate: enterpriseOnDocument.issueDate,
+			dueDate: enterpriseOnDocument.dueDate,
 			enterprise: {
-				id: enterprise.enterprise?.id as string,
-				name: enterprise.enterprise?.name as string,
-				cnpj: enterprise.enterprise?.cnpj as string,
+				id: enterpriseOnDocument.enterprise?.id,
+				name: enterpriseOnDocument.enterprise?.name,
+				cnpj: enterpriseOnDocument.enterprise?.cnpj,
 			},
 			document: {
-				id: enterprise.document?.id as string,
-				title: enterprise.document?.title as string,
-				description: enterprise.document?.description as string,
+				id: enterpriseOnDocument.document?.id,
+				title: enterpriseOnDocument.document?.title,
+				description: enterpriseOnDocument.document?.description,
 			},
 		};
 	});

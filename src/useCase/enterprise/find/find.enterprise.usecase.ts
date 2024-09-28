@@ -5,7 +5,7 @@ import type { InputFindEnterpriseDto, OutputFindEnterpriseDto } from "./find.ent
 export async function findEnterpriseUseCase(input: InputFindEnterpriseDto): Promise<OutputFindEnterpriseDto> {
 	const enterprise = await EnterpriseRepository.find(input.id);
 
-	const enterpriseOnDocument = await findAllEnterpriseOnDocumentUseCase({ enterprise: {id: enterprise.id} });
+	const enterpriseOnDocument = await findAllEnterpriseOnDocumentUseCase({ enterprise: { id: enterprise.id } });
 
 	return {
 		id: enterprise.id as string,
