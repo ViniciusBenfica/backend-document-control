@@ -1,11 +1,11 @@
 import type IDocument from "../document/IDocument";
 import type IEnterprise from "../enterprise/IEnterprise";
+
+type WithId<T> = T & { id: string };
 export default interface IEnterpriseOnDocument {
 	id?: string;
-	enterpriseId: string;
-	documentId: string;
-	enterprise?: Partial<IEnterprise>;
-	document?: Partial<IDocument>;
+	enterprise: WithId<IEnterprise>;
+	document: WithId<IDocument>;
 	issueDate: string | Date;
 	dueDate: string | Date;
 }
