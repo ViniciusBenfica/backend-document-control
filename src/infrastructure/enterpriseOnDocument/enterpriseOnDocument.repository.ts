@@ -11,6 +11,9 @@ const EnterpriseOnDocumentRepository: EnterpriseOnDocumentRepositoryInterface = 
 		});
 	},
 	async findAll(query) {
+		const startDate = query.issueDate ? new Date(query.issueDate) : undefined;
+		const endDate = query.dueDate ? new Date(query.dueDate) : undefined;
+
 		return await prismaClient.enterpriseOnDocument.findMany({
 			where: {
 				enterpriseId: query.enterprise?.id,
@@ -39,6 +42,7 @@ const EnterpriseOnDocumentRepository: EnterpriseOnDocumentRepositoryInterface = 
 						},
 					},
 				],
+				AND: { dueDate: { gte: startDate, lte: endDate } },
 			},
 			include: {
 				enterprise: true,

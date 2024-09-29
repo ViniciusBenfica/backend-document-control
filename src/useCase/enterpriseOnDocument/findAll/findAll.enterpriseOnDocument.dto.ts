@@ -1,4 +1,6 @@
 export interface InputFindAllEnterpriseOnDocumentDto {
+	issueDate?: string;
+	dueDate?: string;
 	enterprise?: {
 		id?: string;
 		name?: string;
