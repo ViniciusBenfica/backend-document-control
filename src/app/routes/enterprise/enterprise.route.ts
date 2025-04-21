@@ -1,4 +1,4 @@
-import { Router } from "express";
+import type { FastifyInstance, FastifyPluginAsync } from "fastify";
 import {
 	createEnterprise,
 	deleteEnterprise,
@@ -7,10 +7,10 @@ import {
 	updateEnterprise,
 } from "./enterprise.route.function";
 
-export const enterpriseRouter = Router();
-
-enterpriseRouter.post("/createEnterprise", createEnterprise);
-enterpriseRouter.get("/findAllEnterprise", findAllEnterprise);
-enterpriseRouter.get("/findEnterprise/:id", findEnterprise);
-enterpriseRouter.put("/updateEnterprise/:id", updateEnterprise);
-enterpriseRouter.delete("/deleteEnterprise/:id", deleteEnterprise);
+export const enterpriseRouter: FastifyPluginAsync = async (fastify: FastifyInstance) => {
+	fastify.post("/createEnterprise", createEnterprise);
+	fastify.get("/findAllEnterprise", findAllEnterprise);
+	fastify.get("/findEnterprise/:id", findEnterprise);
+	fastify.put("/updateEnterprise/:id", updateEnterprise);
+	fastify.delete("/deleteEnterprise/:id", deleteEnterprise);
+};

@@ -1,15 +1,20 @@
-import type { Request, Response } from "express";
+import type { FastifyReply, FastifyRequest } from "fastify";
 import { findAllEnterpriseOnDocumentUseCase } from "../../../useCase/enterpriseOnDocument/findAll/findAll.enterpriseOnDocument.usecase";
 
-export async function findAllEnterpriseOnDocument(req: Request, res: Response) {
-	const query = req.query as {
-		enterpriseId?: string;
-		name?: string;
-		cnpj?: string;
-		title?: string;
-		issueDate?: string;
-		dueDate?: string;
-	};
+interface FindAllEnterpriseOnDocumentQuery {
+	enterpriseId?: string;
+	name?: string;
+	cnpj?: string;
+	title?: string;
+	issueDate?: string;
+	dueDate?: string;
+}
+
+export async function findAllEnterpriseOnDocument(
+	request: FastifyRequest<{ Querystring: FindAllEnterpriseOnDocumentQuery }>,
+	reply: FastifyReply,
+) {
+	const query = request.query;
 
 	const findAllEnterpriseOnDocumentDto = {
 		issueDate: query.issueDate,
@@ -25,5 +30,5 @@ export async function findAllEnterpriseOnDocument(req: Request, res: Response) {
 	};
 
 	const enterprise = await findAllEnterpriseOnDocumentUseCase(findAllEnterpriseOnDocumentDto);
-	return res.status(201).json(enterprise);
+	return reply.status(200).send(enterprise);
 }

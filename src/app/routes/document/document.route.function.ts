@@ -1,47 +1,64 @@
-import type { Request, Response } from "express";
+import type { FastifyReply, FastifyRequest } from "fastify";
 import { createDocumentUseCase } from "../../../useCase/document/create/create.document.usecase";
 import { deleteDocumentUseCase } from "../../../useCase/document/delete/delete.document.usecase";
 import { findDocumentUseCase } from "../../../useCase/document/find/find.document.usecase";
 import { findAllDocumentUseCase } from "../../../useCase/document/findAll/findAll.document.usecase";
 import { updateDocumentUseCase } from "../../../useCase/document/update/update.document.usecase";
 
-export async function createDocument(req: Request, res: Response) {
-	const { title, description } = req.body;
+interface CreateDocumentBody {
+	title: string;
+	description: string;
+}
+
+interface DocumentParams {
+	id: string;
+}
+
+interface FindAllDocumentQuery {
+	title?: string;
+}
+
+export async function createDocument(request: FastifyRequest<{ Body: CreateDocumentBody }>, reply: FastifyReply) {
+	const { title, description } = request.body;
 	const createDocumentDto = {
 		title,
 		description,
 	};
 	const document = await createDocumentUseCase(createDocumentDto);
 
-	return res.status(201).json(document);
+	return reply.status(201).send(document);
 }
 
-export async function findAllDocument(req: Request, res: Response) {
-	const query = req.query as { title?: string };
+export async function findAllDocument(request: FastifyRequest<{ Querystring: FindAllDocumentQuery }>, reply: FastifyReply) {
+	const query = request.query;
 	const document = await findAllDocumentUseCase(query);
 
-	return res.status(201).json(document);
+	return reply.status(200).send(document);
 }
 
-export async function findDocument(req: Request, res: Response) {
-	const { id } = req.params;
+export async function findDocument(request: FastifyRequest<{ Params: DocumentParams }>, reply: FastifyReply) {
+	const { id } = request.params;
 	const updateDocumentDto = {
 		id,
 	};
 
 	try {
 		const document = await findDocumentUseCase(updateDocumentDto);
-		res.status(200).send(document);
+		return reply.status(200).send(document);
 	} catch (error) {
 		if (error instanceof Error) {
-			res.status(500).send({ error: error.message });
+			return reply.status(500).send({ error: error.message });
 		}
+		return reply.status(500).send({ error: "Unknown error" });
 	}
 }
 
-export async function updateDocument(req: Request, res: Response) {
-	const { id } = req.params;
-	const { title, description } = req.body;
+export async function updateDocument(
+	request: FastifyRequest<{ Params: DocumentParams; Body: CreateDocumentBody }>,
+	reply: FastifyReply,
+) {
+	const { id } = request.params;
+	const { title, description } = request.body;
 	const updateDocumentDto = {
 		id,
 		title,
@@ -50,26 +67,28 @@ export async function updateDocument(req: Request, res: Response) {
 
 	try {
 		const document = await updateDocumentUseCase(updateDocumentDto);
-		res.status(200).send(document);
+		return reply.status(200).send(document);
 	} catch (error) {
 		if (error instanceof Error) {
-			res.status(500).send({ error: error.message });
+			return reply.status(500).send({ error: error.message });
 		}
+		return reply.status(500).send({ error: "Unknown error" });
 	}
 }
 
-export async function deleteDocument(req: Request, res: Response) {
-	const { id } = req.params;
+export async function deleteDocument(request: FastifyRequest<{ Params: DocumentParams }>, reply: FastifyReply) {
+	const { id } = request.params;
 	const deleteDocumentDto = {
 		id,
 	};
 
 	try {
 		const document = await deleteDocumentUseCase(deleteDocumentDto);
-		res.status(200).send(document);
+		return reply.status(200).send(document);
 	} catch (error) {
 		if (error instanceof Error) {
-			res.status(500).send({ error: error.message });
+			return reply.status(500).send({ error: error.message });
 		}
+		return reply.status(500).send({ error: "Unknown error" });
 	}
 }

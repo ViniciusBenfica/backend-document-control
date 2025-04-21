@@ -1,19 +1,26 @@
-import cors from "cors";
-import express from "express";
+import cors from "@fastify/cors";
+import fastify from "fastify";
 import { documentRouter } from "./routes/document/document.route";
 import { enterpriseRouter } from "./routes/enterprise/enterprise.route";
 import { enterpriseOnDocumentRouter } from "./routes/enterpriseOnDocument/enterpriseOnDocument.route";
 
-const app = express();
-const port = process.env.SERVER_PORT || 3000;
+const app = fastify();
+const port = Number(process.env.SERVER_PORT || 3000);
 
-app.use(express.json());
-app.use(cors());
+app.register(cors);
 
-app.use(enterpriseRouter);
-app.use(documentRouter);
-app.use(enterpriseOnDocumentRouter);
+app.register(documentRouter);
+app.register(enterpriseRouter);
+app.register(enterpriseOnDocumentRouter);
 
-app.listen(port, () => {
-	console.log(`Example app listening on port ${port}`);
-});
+const start = async () => {
+	try {
+		await app.listen({ port });
+		console.log(`Server listening on port ${port}`);
+	} catch (err) {
+		app.log.error(err);
+		process.exit(1);
+	}
+};
+
+start();
